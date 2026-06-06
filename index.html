@@ -492,7 +492,7 @@ section.soft{background:var(--bg)}
 /* ══════════════════════════════════════
    FOOTER
    ══════════════════════════════════════ */
-footer{background:#070e1a;color:rgba(255,255,255,.38);padding:48px 0}
+footer{background:#070e1a;color:rgba(255,255,255,.5);padding:48px 0}
 .footer-wrap{
   max-width:var(--wrap);margin:0 auto;padding:0 var(--px);
   display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
@@ -501,10 +501,17 @@ footer{background:#070e1a;color:rgba(255,255,255,.38);padding:48px 0}
 .footer-logo span{color:var(--accent-text)}
 .footer-links{display:flex;gap:20px}
 .footer-links a{
-  font-size:.77rem;font-weight:500;color:rgba(255,255,255,.38);transition:color .12s;
+  font-size:.77rem;font-weight:500;color:rgba(255,255,255,.55);transition:color .12s;
 }
-.footer-links a:hover{color:#fff}
-.footer-copy{font-size:.74rem}
+.footer-links a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.footer-copy{font-size:.74rem;color:rgba(255,255,255,.45)}
+.footer-credit{
+  width:100%;padding-top:28px;margin-top:28px;
+  border-top:1px solid rgba(255,255,255,.08);
+  font-size:.72rem;color:rgba(255,255,255,.25);text-align:center;
+}
+.footer-credit a{color:rgba(255,255,255,.4);border-bottom:1px solid rgba(255,255,255,.15);transition:color .12s}
+.footer-credit a:hover{color:rgba(255,255,255,.75)}
 @media(max-width:560px){.footer-wrap{flex-direction:column;align-items:flex-start}}
 
 /* ══════════════════════════════════════
@@ -894,6 +901,11 @@ footer{background:#070e1a;color:rgba(255,255,255,.38);padding:48px 0}
 </section>
 
 <!-- FOOTER -->
+<!-- ─────────────────────────────────────────────────────────────────
+     ATTRIBUTION — please keep the .footer-credit block below intact.
+     The theme is free to use; a visible link back is all that's asked.
+     See: https://gauravs19.github.io/gs-theme/
+     ───────────────────────────────────────────────────────────────── -->
 <footer>
   <div class="footer-wrap">
     <a href="#" class="footer-logo">YOUR<span>TOOL</span></a>
@@ -903,7 +915,13 @@ footer{background:#070e1a;color:rgba(255,255,255,.38);padding:48px 0}
       <a href="https://techtradeoff.substack.com/" target="_blank">Blog</a>
       <a href="https://www.linkedin.com/in/gauravs19/" target="_blank">LinkedIn</a>
     </nav>
-    <span class="footer-copy">© 2025 Gaurav Sharma · MIT License</span>
+    <span class="footer-copy">© 2025 Your Name · MIT License</span>
+
+    <!-- attribution — please keep this line -->
+    <p class="footer-credit">
+      Built with <a href="https://gauravs19.github.io/gs-theme/" target="_blank">gs-theme</a>
+      by <a href="https://gauravs19.github.io/portfolio/" target="_blank">Gaurav Sharma</a>
+    </p>
   </div>
 </footer>
 
