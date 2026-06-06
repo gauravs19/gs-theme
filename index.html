@@ -8,6 +8,11 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="gs-theme — GitHub Pages Starter">
 <meta property="og:description" content="Professional GitHub Pages landing template by Gaurav Sharma.">
+<meta property="og:image" content="https://gauravs19.github.io/gs-theme/og-image.png">
+<meta property="og:url" content="https://gauravs19.github.io/gs-theme/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gauravs19.github.io/gs-theme/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
@@ -100,14 +105,21 @@ ul{list-style:none}
   max-width:var(--wrap);margin:0 auto;padding:0 var(--px);
   height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;
 }
-.logo{font-size:1rem;font-weight:900;letter-spacing:.05em;color:var(--ink)}
+.logo{display:flex;align-items:center;gap:9px;font-size:1rem;font-weight:900;letter-spacing:.05em;color:var(--ink)}
 .logo span{color:var(--accent)}
+.logo-mark{flex-shrink:0}
 .nav-links{display:flex;align-items:center;gap:28px}
 .nav-links a{
   font-size:.81rem;font-weight:500;color:var(--slate);
   letter-spacing:.02em;transition:color .12s;
+  position:relative;padding-bottom:2px;
 }
 .nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--accent);font-weight:600}
+.nav-links a.active::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:2px;background:var(--accent);border-radius:1px;
+}
 .nav-right{display:flex;align-items:center;gap:10px}
 .btn-ghost{
   font-size:.78rem;font-weight:600;color:var(--slate);
@@ -150,6 +162,12 @@ ul{list-style:none}
 .hero{
   background:var(--hero-bg);color:#fff;
   padding:108px 0 88px;overflow:hidden;position:relative;
+}
+@media(max-width:640px){
+  .hero{padding:72px 0 60px}
+  .hero-title{margin-bottom:18px}
+  .hero-body{font-size:.95rem;margin-bottom:32px}
+  .hero-cta{margin-bottom:36px}
 }
 /* dot-grid texture */
 .hero::before{
@@ -492,27 +510,49 @@ section.soft{background:var(--bg)}
 /* ══════════════════════════════════════
    FOOTER
    ══════════════════════════════════════ */
-footer{background:#070e1a;color:rgba(255,255,255,.5);padding:48px 0}
-.footer-wrap{
-  max-width:var(--wrap);margin:0 auto;padding:0 var(--px);
-  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+footer{background:#070e1a;padding:56px 0 36px}
+.footer-inner{max-width:var(--wrap);margin:0 auto;padding:0 var(--px)}
+.footer-top{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:40px;padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  flex-wrap:wrap;
 }
-.footer-logo{font-size:.94rem;font-weight:900;letter-spacing:.05em;color:#fff}
+.footer-brand{}
+.footer-logo{
+  display:flex;align-items:center;gap:9px;
+  font-size:.94rem;font-weight:900;letter-spacing:.05em;color:#fff;margin-bottom:10px;
+}
 .footer-logo span{color:var(--accent-text)}
-.footer-links{display:flex;gap:20px}
-.footer-links a{
-  font-size:.77rem;font-weight:500;color:rgba(255,255,255,.55);transition:color .12s;
+.footer-tagline{font-size:.78rem;color:rgba(255,255,255,.35);line-height:1.6;max-width:240px}
+.footer-nav-group{display:flex;gap:56px;flex-wrap:wrap}
+.footer-col{}
+.footer-col-label{
+  font-size:.65rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.28);margin-bottom:14px;
 }
-.footer-links a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
-.footer-copy{font-size:.74rem;color:rgba(255,255,255,.45)}
-.footer-credit{
-  width:100%;padding-top:28px;margin-top:28px;
-  border-top:1px solid rgba(255,255,255,.08);
-  font-size:.72rem;color:rgba(255,255,255,.25);text-align:center;
+.footer-col-links{display:flex;flex-direction:column;gap:10px}
+.footer-col-links a{
+  font-size:.81rem;font-weight:500;
+  color:rgba(255,255,255,.55);transition:color .12s;
 }
-.footer-credit a{color:rgba(255,255,255,.4);border-bottom:1px solid rgba(255,255,255,.15);transition:color .12s}
+.footer-col-links a:hover{color:#fff}
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;padding-top:28px;flex-wrap:wrap;
+}
+.footer-copy{font-size:.73rem;color:rgba(255,255,255,.3)}
+.footer-credit{font-size:.73rem;color:rgba(255,255,255,.25)}
+.footer-credit a{
+  color:rgba(255,255,255,.45);
+  border-bottom:1px solid rgba(255,255,255,.15);transition:color .12s;
+}
 .footer-credit a:hover{color:rgba(255,255,255,.75)}
-@media(max-width:560px){.footer-wrap{flex-direction:column;align-items:flex-start}}
+@media(max-width:640px){
+  .footer-top{flex-direction:column;gap:32px}
+  .footer-nav-group{gap:32px}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:8px}
+}
 
 /* ══════════════════════════════════════
    SCROLL-REVEAL
@@ -534,7 +574,16 @@ footer{background:#070e1a;color:rgba(255,255,255,.5);padding:48px 0}
 <!-- NAV -->
 <nav id="main-nav">
   <div class="nav-wrap">
-    <a href="#" class="logo">YOUR<span>TOOL</span></a>
+    <a href="#" class="logo">
+      <svg class="logo-mark" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="24" height="24" rx="6" fill="var(--accent)"/>
+        <rect x="5" y="5" width="6" height="6" rx="1.5" fill="white"/>
+        <rect x="13" y="5" width="6" height="6" rx="1.5" fill="white" opacity=".5"/>
+        <rect x="5" y="13" width="6" height="6" rx="1.5" fill="white" opacity=".5"/>
+        <rect x="13" y="13" width="6" height="6" rx="1.5" fill="white"/>
+      </svg>
+      YOUR<span>TOOL</span>
+    </a>
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#how-it-works">How it works</a>
@@ -902,26 +951,67 @@ footer{background:#070e1a;color:rgba(255,255,255,.5);padding:48px 0}
 
 <!-- FOOTER -->
 <!-- ─────────────────────────────────────────────────────────────────
-     ATTRIBUTION — please keep the .footer-credit block below intact.
+     ATTRIBUTION — please keep the footer-credit line below intact.
      The theme is free to use; a visible link back is all that's asked.
      See: https://gauravs19.github.io/gs-theme/
      ───────────────────────────────────────────────────────────────── -->
 <footer>
-  <div class="footer-wrap">
-    <a href="#" class="footer-logo">YOUR<span>TOOL</span></a>
-    <nav class="footer-links">
-      <a href="https://github.com/gauravs19" target="_blank">GitHub</a>
-      <a href="https://gauravs19.github.io/portfolio/" target="_blank">Portfolio</a>
-      <a href="https://techtradeoff.substack.com/" target="_blank">Blog</a>
-      <a href="https://www.linkedin.com/in/gauravs19/" target="_blank">LinkedIn</a>
-    </nav>
-    <span class="footer-copy">© 2025 Your Name · MIT License</span>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect width="24" height="24" rx="6" fill="var(--accent)"/>
+            <rect x="5" y="5" width="6" height="6" rx="1.5" fill="white"/>
+            <rect x="13" y="5" width="6" height="6" rx="1.5" fill="white" opacity=".5"/>
+            <rect x="5" y="13" width="6" height="6" rx="1.5" fill="white" opacity=".5"/>
+            <rect x="13" y="13" width="6" height="6" rx="1.5" fill="white"/>
+          </svg>
+          YOUR<span>TOOL</span>
+        </a>
+        <p class="footer-tagline">Free, browser-native tool for teams who move fast. No login, no server, no lock-in.</p>
+      </div>
 
-    <!-- attribution — please keep this line -->
-    <p class="footer-credit">
-      Built with <a href="https://gauravs19.github.io/gs-theme/" target="_blank">gs-theme</a>
-      by <a href="https://gauravs19.github.io/portfolio/" target="_blank">Gaurav Sharma</a>
-    </p>
+      <!-- Nav columns -->
+      <div class="footer-nav-group">
+        <div class="footer-col">
+          <div class="footer-col-label">Product</div>
+          <div class="footer-col-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How it works</a>
+            <a href="#who">Who it's for</a>
+            <a href="#">Changelog</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">Author</div>
+          <div class="footer-col-links">
+            <a href="https://gauravs19.github.io/portfolio/" target="_blank">Portfolio</a>
+            <a href="https://techtradeoff.substack.com/" target="_blank">Blog</a>
+            <a href="https://www.linkedin.com/in/gauravs19/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/gauravs19" target="_blank">GitHub</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-label">More tools</div>
+          <div class="footer-col-links">
+            <a href="https://gauravs19.github.io/cortex/" target="_blank">CORTEX</a>
+            <a href="https://gauravs19.github.io/cadex/" target="_blank">CADEX</a>
+            <a href="https://gauravs19.github.io/portfolio/" target="_blank">Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Your Name · MIT License</span>
+      <!-- attribution — please keep this line -->
+      <span class="footer-credit">
+        Built with <a href="https://gauravs19.github.io/gs-theme/" target="_blank">gs-theme</a>
+        by <a href="https://gauravs19.github.io/portfolio/" target="_blank">Gaurav Sharma</a>
+      </span>
+    </div>
   </div>
 </footer>
 
@@ -957,6 +1047,38 @@ footer{background:#070e1a;color:rgba(255,255,255,.5);padding:48px 0}
       setTimeout(()=>btn.textContent=orig, 1800);
     });
   });
+})();
+
+// Scroll-spy — highlights active nav link as user scrolls
+(function(){
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a[href^="#"]');
+  if(!sections.length||!links.length||!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      links.forEach(l=>l.classList.remove('active'));
+      const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if(a) a.classList.add('active');
+    });
+  },{threshold:0.35});
+  sections.forEach(s=>io.observe(s));
+})();
+
+// Accent color switcher — ?accent=indigo|emerald|rose|amber in the URL
+(function(){
+  const PRESETS={
+    blue:   ['#1d4ed8','#2563eb','#eff6ff','#bfdbfe','#93c5fd'],
+    indigo: ['#4f46e5','#6366f1','#eef2ff','#c7d2fe','#a5b4fc'],
+    emerald:['#059669','#10b981','#ecfdf5','#a7f3d0','#6ee7b7'],
+    rose:   ['#e11d48','#f43f5e','#fff1f2','#fecdd3','#fda4af'],
+    amber:  ['#d97706','#f59e0b','#fffbeb','#fde68a','#fcd34d'],
+  };
+  const key = new URLSearchParams(location.search).get('accent');
+  const preset = PRESETS[key];
+  if(!preset) return;
+  const props=['--accent','--accent-light','--accent-pale','--accent-border','--accent-text'];
+  preset.forEach((v,i)=>document.documentElement.style.setProperty(props[i],v));
 })();
 </script>
 
