@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>gs-theme — GitHub Pages Starter</title>
+<meta name="description" content="A clean, composable GitHub Pages theme with dark hero, sticky nav, cards, steps, and CTA sections. Drop in your content.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="gs-theme — GitHub Pages Starter">
+<meta property="og:description" content="Clean composable GitHub Pages theme. Zero dependencies, zero build step.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+
+<!--
+  ╔══════════════════════════════════════════════════════════════════════╗
+  ║  gs-theme — GitHub Pages Starter                                    ║
+  ║  Author : Gaurav Sharma (gauravs19)                                  ║
+  ║                                                                      ║
+  ║  ACCENT PRESETS — swap the five --accent-* vars below:              ║
+  ║    Indigo  (default) : #4f46e5 / #6366f1 / #eef2ff / #c7d2fe       ║
+  ║    Amber            : #D97706 / #F59E0B / #FFFBEB / #FDE68A        ║
+  ║    Emerald          : #059669 / #10b981 / #ECFDF5 / #A7F3D0        ║
+  ║    Rose             : #e11d48 / #f43f5e / #FFF1F2 / #FECDD3        ║
+  ║    Sky              : #0284c7 / #0ea5e9 / #F0F9FF / #BAE6FD        ║
+  ║                                                                      ║
+  ║  HERO DARK BG PRESETS:                                              ║
+  ║    Ink Navy  : #0f172a   Indigo Dark : #1e1b4b                      ║
+  ║    Charcoal  : #1C1917   Graphite    : #111827                      ║
+  ╚══════════════════════════════════════════════════════════════════════╝
+-->
+
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── DESIGN TOKENS ── */
+:root{
+  /* Accent — change these five to retheme the whole site */
+  --accent:        #4f46e5;
+  --accent-light:  #6366f1;
+  --accent-pale:   #eef2ff;
+  --accent-border: #c7d2fe;
+  --accent-text:   #a5b4fc;   /* readable accent on dark backgrounds */
+
+  /* Hero dark bg */
+  --hero-bg:       #1e1b4b;
+
+  /* Ink & neutrals */
+  --ink:           #0C0A09;
+  --ink-mid:       #44403C;
+  --slate:         #57534E;
+  --slate-light:   #A8A29E;
+  --border:        #E7E5E4;
+  --bg:            #FAFAF9;
+  --white:         #FFFFFF;
+
+  /* Supporting semantic colors */
+  --green:         #15803D;
+  --green-pale:    #F0FDF4;
+  --red:           #B91C1C;
+  --red-pale:      #FEF2F2;
+  --amber:         #D97706;
+  --amber-pale:    #FFFBEB;
+
+  /* Layout */
+  --wrap:          1160px;
+  --px:            32px;
+  --radius:        6px;
+  --radius-lg:     14px;
+  --radius-xl:     20px;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased;line-height:1.65}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* ── UTILITY: WRAP ── */
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--px)}
+
+/* ════════════════════════════════════
+   ANNOUNCE BAR
+   Remove the whole .announce-bar block to hide it.
+   ════════════════════════════════════ */
+.announce-bar{
+  background:var(--hero-bg);
+  color:rgba(255,255,255,.75);
+  text-align:center;
+  padding:10px 20px;
+  font-size:.76rem;
+  line-height:1.4;
+}
+.announce-bar a{color:var(--accent-text);font-weight:700;border-bottom:1px solid rgba(165,180,252,.3);transition:opacity .12s}
+.announce-bar a:hover{opacity:.75}
+.announce-tag{
+  display:inline-block;
+  background:var(--accent);
+  color:#fff;
+  font-size:.6rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:2px 7px;border-radius:3px;margin-right:8px;vertical-align:middle;
+}
+
+/* ════════════════════════════════════
+   NAVIGATION
+   ════════════════════════════════════ */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-wrap{
+  max-width:var(--wrap);margin:0 auto;padding:0 var(--px);
+  height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.logo{font-size:1rem;font-weight:900;letter-spacing:.05em;color:var(--ink)}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:.81rem;font-weight:500;color:var(--slate);letter-spacing:.02em;transition:color .12s}
+.nav-links a:hover{color:var(--ink)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.btn-ghost{
+  font-size:.78rem;font-weight:600;color:var(--slate);
+  padding:6px 14px;border-radius:var(--radius);border:1px solid var(--border);
+  display:flex;align-items:center;gap:6px;transition:border-color .12s,color .12s;
+}
+.btn-ghost:hover{color:var(--ink);border-color:var(--slate-light)}
+.btn-primary{
+  background:var(--accent);color:#fff;
+  font-size:.81rem;font-weight:700;
+  padding:8px 20px;border-radius:var(--radius);
+  letter-spacing:.01em;transition:opacity .15s;
+}
+.btn-primary:hover{opacity:.85}
+
+/* hamburger — shown only on mobile */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:opacity .2s}
+
+/* mobile nav drawer */
+.nav-mobile{
+  display:none;position:fixed;inset:60px 0 0;
+  background:var(--white);border-top:1px solid var(--border);
+  flex-direction:column;padding:24px var(--px);gap:0;z-index:99;
+}
+.nav-mobile a{
+  display:block;padding:14px 0;
+  font-size:1rem;font-weight:500;color:var(--slate);
+  border-bottom:1px solid var(--border);transition:color .12s;
+}
+.nav-mobile a:hover{color:var(--ink)}
+.nav-mobile .btn-primary{margin-top:20px;text-align:center;padding:12px 24px;font-size:.9rem}
+.nav-mobile.open{display:flex}
+
+@media(max-width:760px){
+  .nav-links,.btn-ghost{display:none}
+  .nav-hamburger{display:flex}
+}
+
+/* ════════════════════════════════════
+   HERO
+   ════════════════════════════════════ */
+.hero{
+  background:var(--hero-bg);color:#fff;
+  padding:100px 0 84px;overflow:hidden;position:relative;
+}
+/* radial glow — change position/color to taste */
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 65% at 72% 50%,rgba(99,102,241,.2),transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent-text);margin-bottom:28px;
+}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent-text)}
+.hero-title{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(2.6rem,5.5vw,4.8rem);
+  font-weight:800;line-height:1.07;color:#fff;
+  max-width:780px;margin-bottom:24px;
+}
+.hero-title em{font-style:italic;color:var(--accent-text)}
+.hero-body{
+  font-size:1.05rem;color:rgba(255,255,255,.55);
+  max-width:540px;line-height:1.8;margin-bottom:40px;
+}
+.hero-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+.btn-hero-primary{
+  background:var(--accent);color:#fff;
+  font-size:.9rem;font-weight:700;padding:13px 30px;border-radius:var(--radius);
+  transition:background .15s;letter-spacing:.01em;
+}
+.btn-hero-primary:hover{background:var(--accent-light)}
+.btn-hero-ghost{
+  font-size:.88rem;font-weight:600;color:rgba(255,255,255,.5);
+  padding:13px 0;border-bottom:1px solid rgba(255,255,255,.18);transition:color .15s;
+}
+.btn-hero-ghost:hover{color:#fff}
+/* small trust chips below CTA */
+.hero-trust{display:flex;flex-wrap:wrap;gap:20px}
+.hero-trust-item{
+  display:flex;align-items:center;gap:7px;
+  font-size:.78rem;font-weight:500;color:rgba(255,255,255,.45);
+}
+.hero-trust-item::before{
+  content:'✓';
+  display:inline-flex;width:16px;height:16px;border-radius:50%;
+  background:rgba(99,102,241,.25);align-items:center;justify-content:center;
+  font-size:.62rem;font-weight:800;color:var(--accent-text);flex-shrink:0;
+}
+
+/* ════════════════════════════════════
+   SECTION SCAFFOLD
+   ════════════════════════════════════ */
+section{padding:88px 0}
+section.dark{background:var(--hero-bg);color:#fff}
+section.soft{background:var(--bg)}
+
+.section-label{
+  font-size:.67rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;
+}
+.dark .section-label{color:var(--accent-text)}
+.section-heading{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(1.9rem,3.5vw,2.8rem);
+  font-weight:800;line-height:1.12;color:var(--ink);
+  max-width:680px;
+}
+.dark .section-heading{color:#fff}
+.section-sub{
+  margin-top:16px;font-size:1rem;color:var(--slate);
+  line-height:1.8;max-width:560px;
+}
+.dark .section-sub{color:rgba(255,255,255,.5)}
+.section-header{margin-bottom:56px}
+.section-header.center{text-align:center}
+.section-header.center .section-heading,.section-header.center .section-sub{margin-left:auto;margin-right:auto}
+
+/* ════════════════════════════════════
+   STAT STRIP  (3-col pain/proof)
+   ════════════════════════════════════ */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.dark .stat-grid{border-color:rgba(255,255,255,.1)}
+.stat-item{padding:40px 36px;border-right:1px solid var(--border);position:relative}
+.dark .stat-item{border-right-color:rgba(255,255,255,.08)}
+.stat-item:last-child{border-right:none}
+.stat-number{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(2.2rem,4vw,3.2rem);font-weight:800;
+  color:var(--accent);line-height:1;margin-bottom:12px;
+}
+.dark .stat-number{color:var(--accent-text)}
+.stat-label{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:8px}
+.dark .stat-label{color:#fff}
+.stat-desc{font-size:.82rem;color:var(--slate);line-height:1.6}
+.dark .stat-desc{color:rgba(255,255,255,.45)}
+
+@media(max-width:720px){
+  .stat-grid{grid-template-columns:1fr}
+  .stat-item{border-right:none;border-bottom:1px solid var(--border)}
+  .dark .stat-item{border-bottom-color:rgba(255,255,255,.08)}
+  .stat-item:last-child{border-bottom:none}
+}
+
+/* ════════════════════════════════════
+   CARD GRID  (2/3/4 col)
+   ════════════════════════════════════ */
+.card-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.card-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+
+.card{
+  padding:32px;border:1px solid var(--border);border-radius:var(--radius-lg);
+  background:var(--white);transition:box-shadow .18s,transform .18s,border-color .18s;
+}
+.card:hover{box-shadow:0 8px 28px rgba(0,0,0,.07);transform:translateY(-2px);border-color:var(--accent-border)}
+.dark .card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.09)}
+.dark .card:hover{border-color:rgba(255,255,255,.2);box-shadow:0 8px 28px rgba(0,0,0,.3)}
+.soft .card{background:var(--white)}
+
+.card-icon{
+  width:42px;height:42px;border-radius:10px;
+  background:var(--accent-pale);display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;margin-bottom:20px;
+}
+.dark .card-icon{background:rgba(255,255,255,.08)}
+.card-title{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+.dark .card-title{color:#fff}
+.card-body{font-size:.84rem;color:var(--slate);line-height:1.7}
+.dark .card-body{color:rgba(255,255,255,.45)}
+
+/* tag inside card */
+.card-tag{
+  display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 8px;border-radius:3px;background:var(--accent-pale);color:var(--accent);
+  margin-bottom:14px;
+}
+.dark .card-tag{background:rgba(255,255,255,.1);color:var(--accent-text)}
+
+@media(max-width:900px){
+  .card-grid-4{grid-template-columns:repeat(2,1fr)}
+  .card-grid-3{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .card-grid-4,.card-grid-3,.card-grid-2{grid-template-columns:1fr}
+}
+
+/* ════════════════════════════════════
+   STEP LIST  (numbered workflow)
+   ════════════════════════════════════ */
+.step-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.dark .step-list{border-color:rgba(255,255,255,.1)}
+.step-item{
+  display:grid;grid-template-columns:72px 1fr auto;align-items:start;
+  padding:28px 32px;border-bottom:1px solid var(--border);gap:24px;
+  transition:background .15s;
+}
+.dark .step-item{border-bottom-color:rgba(255,255,255,.08)}
+.step-item:last-child{border-bottom:none}
+.step-item:hover{background:var(--bg)}
+.dark .step-item:hover{background:rgba(255,255,255,.03)}
+.step-num{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:2rem;font-weight:800;color:var(--accent-border);line-height:1;padding-top:2px;
+}
+.dark .step-num{color:rgba(255,255,255,.12)}
+.step-content{}
+.step-title{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.dark .step-title{color:#fff}
+.step-desc{font-size:.83rem;color:var(--slate);line-height:1.65}
+.dark .step-desc{color:rgba(255,255,255,.45)}
+.step-badge{
+  font-size:.7rem;font-weight:600;color:var(--slate-light);
+  background:var(--bg);border:1px solid var(--border);
+  padding:4px 10px;border-radius:99px;white-space:nowrap;margin-top:4px;
+}
+.dark .step-badge{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.35)}
+
+@media(max-width:620px){
+  .step-item{grid-template-columns:48px 1fr;gap:16px}
+  .step-badge{display:none}
+  .step-num{font-size:1.5rem}
+}
+
+/* ════════════════════════════════════
+   COMPARISON TABLE
+   ════════════════════════════════════ */
+.compare-table{
+  width:100%;border-collapse:collapse;
+  border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;
+}
+.dark .compare-table{border-color:rgba(255,255,255,.1)}
+.compare-table th{
+  padding:16px 24px;text-align:left;
+  font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);
+  background:var(--hero-bg);
+}
+.compare-table th:first-child{border-radius:0}
+.compare-table td{
+  padding:16px 24px;font-size:.88rem;color:var(--slate);
+  border-top:1px solid var(--border);vertical-align:top;
+}
+.dark .compare-table td{border-top-color:rgba(255,255,255,.07);color:rgba(255,255,255,.5)}
+.compare-table td:first-child{font-weight:600;color:var(--ink)}
+.dark .compare-table td:first-child{color:rgba(255,255,255,.8)}
+.compare-table tr:hover td{background:var(--bg)}
+.dark .compare-table tr:hover td{background:rgba(255,255,255,.03)}
+.check{color:var(--green);font-weight:800}
+.cross{color:var(--red);font-weight:800}
+.compare-col-head{font-weight:700;font-size:.8rem;color:var(--ink-mid)}
+
+@media(max-width:640px){
+  .compare-table th,.compare-table td{padding:12px 14px;font-size:.8rem}
+}
+
+/* ════════════════════════════════════
+   QUOTE / TESTIMONIAL
+   ════════════════════════════════════ */
+.quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.quote-card{
+  padding:32px;border:1px solid var(--border);border-radius:var(--radius-lg);
+  background:var(--white);display:flex;flex-direction:column;gap:20px;
+}
+.dark .quote-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.09)}
+.quote-text{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1rem;font-style:italic;line-height:1.75;color:var(--ink-mid);
+  flex:1;
+}
+.dark .quote-text{color:rgba(255,255,255,.65)}
+.quote-text::before{content:'\201C';color:var(--accent);font-size:1.4rem;line-height:0;vertical-align:-.3em;margin-right:2px}
+.quote-author{display:flex;align-items:center;gap:12px}
+.quote-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--accent-pale);display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:800;color:var(--accent);flex-shrink:0;
+}
+.dark .quote-avatar{background:rgba(255,255,255,.1);color:var(--accent-text)}
+.quote-name{font-size:.82rem;font-weight:700;color:var(--ink)}
+.dark .quote-name{color:#fff}
+.quote-role{font-size:.75rem;color:var(--slate-light)}
+
+@media(max-width:800px){.quote-grid{grid-template-columns:1fr}}
+
+/* ════════════════════════════════════
+   FEATURE / PERSONA CARDS (icon row)
+   ════════════════════════════════════ */
+.persona-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.persona-card{
+  padding:28px;border:1px solid var(--border);border-radius:var(--radius-lg);
+  background:var(--white);
+}
+.dark .persona-card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.09)}
+.persona-icon{font-size:1.6rem;margin-bottom:14px}
+.persona-title{font-size:.92rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.dark .persona-title{color:#fff}
+.persona-desc{font-size:.82rem;color:var(--slate);line-height:1.65}
+.dark .persona-desc{color:rgba(255,255,255,.45)}
+
+@media(max-width:720px){.persona-grid{grid-template-columns:1fr}}
+
+/* ════════════════════════════════════
+   SPLIT SECTION  (text + visual)
+   ════════════════════════════════════ */
+.split{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:72px}
+.split.reverse{direction:rtl}
+.split.reverse>*{direction:ltr}
+.split-visual{
+  background:var(--accent-pale);border-radius:var(--radius-xl);
+  border:1px solid var(--accent-border);
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+  font-size:.82rem;color:var(--accent);font-weight:600;
+}
+.dark .split-visual{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.4)}
+.split-list{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+.split-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.88rem;color:var(--slate);line-height:1.6;
+}
+.dark .split-list li{color:rgba(255,255,255,.5)}
+.split-list li::before{
+  content:'→';color:var(--accent);font-weight:700;font-size:.9rem;flex-shrink:0;margin-top:1px;
+}
+.dark .split-list li::before{color:var(--accent-text)}
+
+@media(max-width:780px){
+  .split,.split.reverse{grid-template-columns:1fr;direction:ltr;gap:36px}
+  .split.reverse>*{direction:ltr}
+}
+
+/* ════════════════════════════════════
+   INLINE CTA CALLOUT
+   ════════════════════════════════════ */
+.callout{
+  background:var(--accent-pale);border:1px solid var(--accent-border);
+  border-radius:var(--radius-xl);padding:48px 52px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;
+}
+.dark .callout{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+.callout-text{}
+.callout-title{font-size:1.2rem;font-weight:800;color:var(--ink);margin-bottom:6px}
+.dark .callout-title{color:#fff}
+.callout-desc{font-size:.88rem;color:var(--slate);line-height:1.6}
+.dark .callout-desc{color:rgba(255,255,255,.5)}
+.callout-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
+
+@media(max-width:640px){
+  .callout{flex-direction:column;align-items:flex-start;padding:32px}
+  .callout-actions{width:100%;flex-direction:column}
+  .callout-actions .btn-primary{width:100%;text-align:center;padding:13px}
+}
+
+/* ════════════════════════════════════
+   FULL-WIDTH CTA SECTION
+   ════════════════════════════════════ */
+.cta-section{
+  background:var(--hero-bg);color:#fff;
+  padding:96px 0;text-align:center;position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(99,102,241,.15),transparent 70%);
+  pointer-events:none;
+}
+.cta-inner{position:relative;z-index:1;max-width:600px;margin:0 auto;padding:0 var(--px)}
+.cta-heading{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.12;
+  color:#fff;margin-bottom:16px;
+}
+.cta-heading em{font-style:italic;color:var(--accent-text)}
+.cta-sub{font-size:1rem;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:36px}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn-cta-primary{
+  background:var(--accent);color:#fff;
+  font-size:.92rem;font-weight:700;padding:14px 34px;border-radius:var(--radius);
+  transition:background .15s;
+}
+.btn-cta-primary:hover{background:var(--accent-light)}
+.btn-cta-ghost{
+  font-size:.9rem;font-weight:600;color:rgba(255,255,255,.5);
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,.2);transition:color .15s;
+}
+.btn-cta-ghost:hover{color:#fff}
+
+/* ════════════════════════════════════
+   SHARE / AMBER STRIP
+   ════════════════════════════════════ */
+.share-strip{
+  background:var(--amber-pale);border-top:1px solid #FDE68A;border-bottom:1px solid #FDE68A;
+  padding:20px var(--px);display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
+  font-size:.85rem;color:var(--amber);font-weight:600;
+}
+.share-strip .btn-ghost{color:var(--amber);border-color:#FDE68A}
+.share-strip .btn-ghost:hover{border-color:var(--amber)}
+
+/* ════════════════════════════════════
+   FOOTER
+   ════════════════════════════════════ */
+footer{
+  background:var(--ink);color:rgba(255,255,255,.4);
+  padding:48px 0;
+}
+.footer-wrap{
+  max-width:var(--wrap);margin:0 auto;padding:0 var(--px);
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.footer-logo{font-size:.95rem;font-weight:900;letter-spacing:.05em;color:#fff}
+.footer-logo span{color:var(--accent-text)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:.78rem;font-weight:500;color:rgba(255,255,255,.4);transition:color .12s}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:.75rem}
+
+@media(max-width:560px){.footer-wrap{flex-direction:column;align-items:flex-start}}
+
+/* ════════════════════════════════════
+   SCROLL-REVEAL ANIMATION
+   Drop class="reveal" on any section or element.
+   ════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+</style>
+</head>
+
+<body>
+
+<!-- ══════════════════════════════════════
+     ANNOUNCE BAR
+     Delete this block to hide.
+     ══════════════════════════════════════ -->
+<div class="announce-bar">
+  <span class="announce-tag">New</span>
+  Your announcement here — or link to a release note.
+  <a href="#">Read more →</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     NAV
+     ══════════════════════════════════════ -->
+<nav>
+  <div class="nav-wrap">
+    <a href="#" class="logo">YOUR<span>TOOL</span></a>
+
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#who">Who it's for</a>
+      <a href="https://github.com/gauravs19" target="_blank">GitHub</a>
+    </div>
+
+    <div class="nav-right">
+      <a href="https://github.com/gauravs19" class="btn-ghost" target="_blank">
+        <!-- GitHub SVG icon -->
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.7 18 5 18 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+        GitHub
+      </a>
+      <a href="#" class="btn-primary">Open App →</a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <div class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-mobile" id="nav-mobile">
+  <a href="#features">Features</a>
+  <a href="#how-it-works">How it works</a>
+  <a href="#who">Who it's for</a>
+  <a href="https://github.com/gauravs19" target="_blank">GitHub</a>
+  <a href="#" class="btn-primary">Open App →</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     HERO
+     ══════════════════════════════════════ -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow">Your Tool Name</div>
+
+    <h1 class="hero-title">
+      The tool that makes<br>
+      <em>complex work</em> feel simple.
+    </h1>
+
+    <p class="hero-body">
+      One sentence that explains what the tool does and for whom.
+      Keep it grounded — avoid hype. Lead with the outcome users care about.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#" class="btn-hero-primary">Try it free →</a>
+      <a href="#how-it-works" class="btn-hero-ghost">See how it works</a>
+    </div>
+
+    <div class="hero-trust">
+      <span class="hero-trust-item">Browser-only, no login</span>
+      <span class="hero-trust-item">Free &amp; open source</span>
+      <span class="hero-trust-item">No data leaves your device</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     STAT STRIP  (pain points / proof)
+     ══════════════════════════════════════ -->
+<section class="soft reveal">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="section-label">The problem</div>
+      <h2 class="section-heading">Why this exists</h2>
+      <p class="section-sub">Two sentences that frame the pain — not the solution. Make the reader nod in recognition.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="stat-number">73%</div>
+        <div class="stat-label">Stat headline</div>
+        <div class="stat-desc">One sentence of supporting context. Source or timeframe if relevant.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4×</div>
+        <div class="stat-label">Another metric</div>
+        <div class="stat-desc">Keep each stat self-contained so users can scan without reading prose.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">$0</div>
+        <div class="stat-label">Cost to use</div>
+        <div class="stat-desc">If cost is a genuine differentiator, say it plainly here.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FEATURE CARDS  (dark 4-col)
+     ══════════════════════════════════════ -->
+<section class="dark reveal" id="features">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">Features</div>
+      <h2 class="section-heading">Everything you need, nothing you don't.</h2>
+      <p class="section-sub">Each feature solves one specific frustration. Bullet labels, not marketing speak.</p>
+    </div>
+    <div class="card-grid-4">
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Feature one</div>
+        <div class="card-body">One or two lines. What it does, why it saves time or reduces risk.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔒</div>
+        <div class="card-title">Feature two</div>
+        <div class="card-body">Stays focused on the user benefit, not the implementation detail.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">Feature three</div>
+        <div class="card-body">Icons are decorative shorthand — choose ones that reinforce the concept.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <div class="card-title">Feature four</div>
+        <div class="card-body">End the grid on an integration, export, or collaboration feature.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SPLIT SECTION  (text + visual)
+     ══════════════════════════════════════ -->
+<section class="reveal">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-text">
+        <div class="section-label">How it helps</div>
+        <h2 class="section-heading">A deeper look at one key capability.</h2>
+        <p class="section-sub">Use this for a feature that benefits from more explanation or a screenshot. Keep copy tight — the visual does the rest.</p>
+        <ul class="split-list">
+          <li>First bullet — a concrete thing users can do.</li>
+          <li>Second bullet — outcome or time saved.</li>
+          <li>Third bullet — what makes this different from alternatives.</li>
+        </ul>
+      </div>
+      <div class="split-visual">[ Screenshot / diagram placeholder ]</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     COMPARISON TABLE
+     ══════════════════════════════════════ -->
+<section class="soft reveal">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="section-label">Before &amp; after</div>
+      <h2 class="section-heading">What changes when you use it.</h2>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Workflow step</th>
+            <th>Without this tool</th>
+            <th>With this tool</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Step one</td>
+            <td><span class="cross">✗</span> Manual, error-prone</td>
+            <td><span class="check">✓</span> Automated in seconds</td>
+          </tr>
+          <tr>
+            <td>Step two</td>
+            <td><span class="cross">✗</span> Scattered across tools</td>
+            <td><span class="check">✓</span> Single source of truth</td>
+          </tr>
+          <tr>
+            <td>Step three</td>
+            <td><span class="cross">✗</span> Hard to share or version</td>
+            <td><span class="check">✓</span> One-click export</td>
+          </tr>
+          <tr>
+            <td>Step four</td>
+            <td><span class="cross">✗</span> Requires specialist knowledge</td>
+            <td><span class="check">✓</span> Any team member can run it</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     STEP LIST  (how it works)
+     ══════════════════════════════════════ -->
+<section class="reveal" id="how-it-works">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">How it works</div>
+      <h2 class="section-heading">Five steps from zero to done.</h2>
+      <p class="section-sub">Each step should be concrete and completable. Avoid vague verbs like "leverage" or "optimize."</p>
+    </div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-title">Open the tool — no install, no login</div>
+          <div class="step-desc">Runs fully in the browser. Nothing is sent to a server. Your data stays local.</div>
+        </div>
+        <div class="step-badge">~30 sec</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-title">Configure your inputs</div>
+          <div class="step-desc">Fill in the fields that matter. Sensible defaults are pre-loaded so you can start immediately.</div>
+        </div>
+        <div class="step-badge">2 min</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-title">Review the output</div>
+          <div class="step-desc">Results update live as you change inputs. No submit button, no round-trip.</div>
+        </div>
+        <div class="step-badge">5 min</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-title">Adjust and iterate</div>
+          <div class="step-desc">Tweak assumptions, run scenarios, compare outcomes side by side.</div>
+        </div>
+        <div class="step-badge">ongoing</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <div class="step-title">Export or share</div>
+          <div class="step-desc">Copy a shareable link, download a PDF, or paste structured output directly into your document.</div>
+        </div>
+        <div class="step-badge">~1 min</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TESTIMONIALS / QUOTES
+     ══════════════════════════════════════ -->
+<section class="soft reveal">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="section-label">Practitioners say</div>
+      <h2 class="section-heading">Trusted by the people doing the work.</h2>
+    </div>
+    <div class="quote-grid">
+      <div class="quote-card">
+        <div class="quote-text">This replaced a spreadsheet I'd been maintaining for three years. I shipped the same output in an afternoon.</div>
+        <div class="quote-author">
+          <div class="quote-avatar">AK</div>
+          <div>
+            <div class="quote-name">A. Kumar</div>
+            <div class="quote-role">Solutions Architect, Enterprise</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">The comparison view saved us from a bad call in a client meeting. The numbers were right there, structured and defensible.</div>
+        <div class="quote-author">
+          <div class="quote-avatar">PR</div>
+          <div>
+            <div class="quote-name">P. Rajan</div>
+            <div class="quote-role">Presales Lead, Mid-market SaaS</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-card">
+        <div class="quote-text">No login, no data upload. That alone made it the easiest tool to get through procurement in years.</div>
+        <div class="quote-author">
+          <div class="quote-avatar">SL</div>
+          <div>
+            <div class="quote-name">S. Lee</div>
+            <div class="quote-role">Engineering Manager, FinTech</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     WHO IT'S FOR
+     ══════════════════════════════════════ -->
+<section class="dark reveal" id="who">
+  <div class="wrap">
+    <div class="section-header center">
+      <div class="section-label">Who it's for</div>
+      <h2 class="section-heading">Built for people who move fast and own decisions.</h2>
+    </div>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-icon">🏗️</div>
+        <div class="persona-title">Solutions Architects</div>
+        <div class="persona-desc">Defending scope in discovery. Needs structured output clients can read without a debrief.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">📦</div>
+        <div class="persona-title">Product Managers</div>
+        <div class="persona-desc">Sizing features for roadmap tradeoffs. No engineering dependency to get a rough number.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-icon">🚀</div>
+        <div class="persona-title">Startup Founders</div>
+        <div class="persona-desc">First-hire planning or investor decks. A framework that produces defensible estimates fast.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     INLINE CALLOUT (integration / partner)
+     ══════════════════════════════════════ -->
+<section class="reveal">
+  <div class="wrap">
+    <div class="callout">
+      <div class="callout-text">
+        <div class="callout-title">Works alongside your other tools.</div>
+        <div class="callout-desc">Pair this with CADEX for deal qualification, CORTEX for estimation, or any presales workflow. Open source means you can fork and adapt freely.</div>
+      </div>
+      <div class="callout-actions">
+        <a href="#" class="btn-primary">See integrations →</a>
+        <a href="https://github.com/gauravs19" class="btn-ghost" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SHARE STRIP  (optional amber bar)
+     ══════════════════════════════════════ -->
+<div class="share-strip">
+  <span>Found this useful? Share it with your team.</span>
+  <a href="#" class="btn-ghost" id="copy-link">Copy link</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     CTA SECTION
+     ══════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="cta-heading">Ready to try it?<br><em>It takes two minutes.</em></h2>
+    <p class="cta-sub">No account. No install. Open the tool, configure your inputs, and get structured output you can share immediately.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-cta-primary">Open the tool →</a>
+      <a href="https://github.com/gauravs19" class="btn-cta-ghost" target="_blank">View source on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════ -->
+<footer>
+  <div class="footer-wrap">
+    <a href="#" class="footer-logo">YOUR<span>TOOL</span></a>
+    <nav class="footer-links">
+      <a href="https://github.com/gauravs19" target="_blank">GitHub</a>
+      <a href="https://gauravs19.github.io/portfolio/" target="_blank">Portfolio</a>
+      <a href="https://techtradeoff.substack.com/" target="_blank">Blog</a>
+      <a href="https://www.linkedin.com/in/gauravs19/" target="_blank">LinkedIn</a>
+    </nav>
+    <span class="footer-copy">© 2025 Gaurav Sharma · MIT License</span>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════
+     JS — hamburger + scroll-reveal + copy
+     ══════════════════════════════════════ -->
+<script>
+// Hamburger toggle
+(function(){
+  const btn = document.getElementById('hamburger');
+  const drawer = document.getElementById('nav-mobile');
+  if(!btn||!drawer) return;
+  btn.addEventListener('click',()=>{
+    const open = drawer.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  });
+  // close on nav link click
+  drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>drawer.classList.remove('open')));
+})();
+
+// Scroll-reveal
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  if(!els.length) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+  },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+
+// Copy link
+(function(){
+  const btn = document.getElementById('copy-link');
+  if(!btn) return;
+  btn.addEventListener('click',e=>{
+    e.preventDefault();
+    navigator.clipboard.writeText(window.location.href).then(()=>{
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(()=>btn.textContent=orig, 1800);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
