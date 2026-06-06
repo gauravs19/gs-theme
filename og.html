@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--
+  OG IMAGE GENERATOR
+  Open this file in a browser, resize the window to exactly 1200×630,
+  then screenshot it and save as og-image.png in the repo root.
+  Or use a headless tool: npx shot-scraper og.html -o og-image.png -w 1200 -h 630
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  width:1200px;height:630px;overflow:hidden;
+  background:#0f172a;
+  font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;
+  position:relative;
+}
+/* dot grid */
+body::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:32px 32px;pointer-events:none;
+}
+body::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 75% 40%,rgba(37,99,235,.25),transparent 65%);
+  pointer-events:none;
+}
+.card{
+  position:relative;z-index:1;
+  flex:1;display:flex;align-items:center;
+  padding:72px 88px;gap:80px;
+}
+.left{flex:1}
+.tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:#93c5fd;margin-bottom:32px;
+}
+.tag::before{content:'';width:28px;height:1px;background:#93c5fd}
+h1{
+  font-family:'Georgia',serif;
+  font-size:72px;font-weight:700;line-height:1.05;
+  color:#fff;margin-bottom:28px;
+}
+h1 em{font-style:italic;color:#93c5fd}
+p{font-size:20px;color:rgba(255,255,255,.5);line-height:1.6;max-width:480px;margin-bottom:40px}
+.chips{display:flex;gap:12px;flex-wrap:wrap}
+.chip{
+  font-size:12px;font-weight:600;padding:6px 16px;border-radius:99px;
+  background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);
+  border:1px solid rgba(255,255,255,.1);
+}
+.right{flex-shrink:0}
+/* mini mockup */
+.mockup{
+  width:340px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;overflow:hidden;
+}
+.m-chrome{
+  background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.08);
+  padding:12px 16px;display:flex;align-items:center;gap:8px;
+}
+.dot{width:10px;height:10px;border-radius:50%;display:block}
+.m-title{font-size:11px;color:rgba(255,255,255,.25);font-weight:500;letter-spacing:.06em;flex:1;text-align:center}
+.m-body{padding:18px}
+.m-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.m-metric{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px 8px}
+.m-metric.hi{background:rgba(37,99,235,.2);border-color:rgba(147,197,253,.2)}
+.m-val{font-size:18px;font-weight:800;color:#fff;margin-bottom:2px}
+.m-metric.hi .m-val{color:#93c5fd}
+.m-lbl{font-size:8px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em}
+.m-bars{display:flex;flex-direction:column;gap:8px}
+.bar-row{display:grid;grid-template-columns:52px 1fr 28px;align-items:center;gap:6px}
+.bar-lbl{font-size:10px;color:rgba(255,255,255,.35);text-align:right}
+.bar-track{background:rgba(255,255,255,.06);border-radius:3px;height:5px;overflow:hidden}
+.bar-fill{height:100%;background:#1d4ed8;border-radius:3px;opacity:.8}
+.bar-val{font-size:9px;color:rgba(255,255,255,.25)}
+/* footer strip */
+.footer{
+  position:relative;z-index:1;
+  border-top:1px solid rgba(255,255,255,.07);
+  padding:20px 88px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-brand{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:900;color:#fff;letter-spacing:.06em}
+.footer-brand span{color:#93c5fd}
+.footer-url{font-size:13px;color:rgba(255,255,255,.28)}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="card">
+  <div class="left">
+    <div class="tag">Open-source · GitHub Pages</div>
+    <h1>The tool that makes<br><em>complex work</em><br>feel simple.</h1>
+    <p>Browser-native. Zero install. Zero login. Shareable URLs. MIT licensed.</p>
+    <div class="chips">
+      <span class="chip">Browser-only</span>
+      <span class="chip">Free &amp; open source</span>
+      <span class="chip">No data leaves your device</span>
+    </div>
+  </div>
+  <div class="right">
+    <div class="mockup">
+      <div class="m-chrome">
+        <span class="dot" style="background:#ff5f57"></span>
+        <span class="dot" style="background:#febc2e"></span>
+        <span class="dot" style="background:#28c840"></span>
+        <span class="m-title">YOURTOOL · Estimate v2.0</span>
+      </div>
+      <div class="m-body">
+        <div class="m-metrics">
+          <div class="m-metric"><div class="m-val">$142k</div><div class="m-lbl">Total cost</div></div>
+          <div class="m-metric"><div class="m-val">18 wks</div><div class="m-lbl">Timeline</div></div>
+          <div class="m-metric hi"><div class="m-val">94%</div><div class="m-lbl">Confidence</div></div>
+        </div>
+        <div class="m-bars">
+          <div class="bar-row"><span class="bar-lbl">Frontend</span><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div><span class="bar-val">6 wks</span></div>
+          <div class="bar-row"><span class="bar-lbl">Backend</span><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div><span class="bar-val">8 wks</span></div>
+          <div class="bar-row"><span class="bar-lbl">DevOps</span><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><span class="bar-val">3 wks</span></div>
+          <div class="bar-row"><span class="bar-lbl">QA</span><div class="bar-track"><div class="bar-fill" style="width:22%"></div></div><span class="bar-val">2 wks</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-brand">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect width="24" height="24" rx="6" fill="#1d4ed8"/>
+      <rect x="5" y="5" width="6" height="6" rx="1.5" fill="white"/>
+      <rect x="13" y="5" width="6" height="6" rx="1.5" fill="white" opacity=".5"/>
+      <rect x="5" y="13" width="6" height="6" rx="1.5" fill="white" opacity=".5"/>
+      <rect x="13" y="13" width="6" height="6" rx="1.5" fill="white"/>
+    </svg>
+    YOUR<span>TOOL</span>
+  </div>
+  <span class="footer-url">gauravs19.github.io/gs-theme</span>
+</div>
+
+</body>
+</html>

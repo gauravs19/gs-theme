@@ -181,7 +181,83 @@ ul{list-style:none}
   background:radial-gradient(ellipse 55% 70% at 75% 50%,rgba(37,99,235,.22),transparent 68%);
   pointer-events:none;
 }
-.hero-inner{position:relative;z-index:1}
+/* hero 2-col layout */
+.hero-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:64px;align-items:center;
+}
+/* ── HERO MOCKUP (right column) ── */
+.hero-mockup{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;overflow:hidden;
+}
+.mockup-chrome{
+  background:rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:11px 16px;
+  display:flex;align-items:center;gap:10px;
+}
+.chrome-dots{display:flex;gap:6px}
+.chrome-dot{width:10px;height:10px;border-radius:50%;display:block}
+.chrome-title{font-size:.7rem;color:rgba(255,255,255,.25);font-weight:500;letter-spacing:.05em;flex:1;text-align:center}
+.mockup-body{padding:18px}
+.mockup-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.mockup-metric{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);
+  border-radius:8px;padding:13px 10px;
+}
+.mockup-metric.hi{background:rgba(37,99,235,.18);border-color:rgba(147,197,253,.18)}
+.mockup-metric-val{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:3px}
+.mockup-metric.hi .mockup-metric-val{color:var(--accent-text)}
+.mockup-metric-label{font-size:.6rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.08em}
+.mockup-chart{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
+.chart-row{display:grid;grid-template-columns:52px 1fr 26px;align-items:center;gap:8px}
+.chart-label{font-size:.68rem;color:rgba(255,255,255,.35);text-align:right}
+.chart-track{background:rgba(255,255,255,.06);border-radius:3px;height:5px;overflow:hidden}
+.chart-bar{height:100%;background:var(--accent);border-radius:3px;opacity:.75}
+.chart-val{font-size:.65rem;color:rgba(255,255,255,.28)}
+.mockup-footer{
+  display:flex;align-items:center;gap:6px;padding-top:12px;
+  border-top:1px solid rgba(255,255,255,.06);
+  font-size:.66rem;color:rgba(255,255,255,.28);
+}
+.mockup-footer::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:#28c840;display:inline-block;flex-shrink:0;
+}
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-mockup{display:none}
+}
+/* ── SPLIT IMAGE REPLACE OVERLAY ── */
+.split-img-wrap{position:relative;border-radius:var(--radius-xl);overflow:hidden;box-shadow:0 12px 40px rgba(15,23,42,.09)}
+.split-img-wrap img,.split-img-wrap svg{display:block;width:100%;border:1px solid var(--border);border-radius:var(--radius-xl)}
+.split-img-replace{
+  position:absolute;top:10px;left:10px;
+  background:rgba(0,0,0,.55);color:#fff;
+  font-size:.6rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  padding:3px 9px;border-radius:4px;border:1px solid rgba(255,255,255,.15);
+  pointer-events:none;
+}
+/* ── PALETTE PICKER ── */
+.palette-picker{
+  position:fixed;bottom:24px;right:24px;z-index:300;
+  background:rgba(15,23,42,.9);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;padding:9px 14px;
+  display:flex;align-items:center;gap:9px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 4px 20px rgba(0,0,0,.35);
+}
+.palette-label{font-size:.58rem;color:rgba(255,255,255,.28);font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.palette-dot{
+  width:16px;height:16px;border-radius:50%;border:2px solid transparent;
+  cursor:pointer;transition:transform .15s,border-color .15s;flex-shrink:0;
+}
+.palette-dot:hover{transform:scale(1.25)}
+.palette-dot.active{border-color:#fff}
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
   font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
@@ -614,24 +690,81 @@ footer{background:#070e1a;padding:56px 0 36px}
 <!-- HERO -->
 <section class="hero">
   <div class="wrap hero-inner">
-    <div class="hero-eyebrow">Open-source · Browser-native</div>
-    <h1 class="hero-title">
-      The tool that makes<br>
-      <em>complex work</em> feel simple.
-    </h1>
-    <p class="hero-body">
-      One sentence that explains what the tool does and for whom.
-      Keep it grounded — avoid hype. Lead with the outcome users care about.
-    </p>
-    <div class="hero-cta">
-      <a href="#" class="btn-hero-primary">Try it free →</a>
-      <a href="#how-it-works" class="btn-hero-ghost">See how it works</a>
+
+    <!-- LEFT: copy -->
+    <!-- REPLACE: hero-eyebrow, hero-title, hero-body, cta href, trust items -->
+    <div class="hero-text">
+      <div class="hero-eyebrow">Open-source · Browser-native</div>
+      <h1 class="hero-title">
+        The tool that makes<br>
+        <em>complex work</em> feel simple.
+      </h1>
+      <p class="hero-body">
+        One sentence that explains what the tool does and for whom.
+        Keep it grounded — avoid hype. Lead with the outcome users care about.
+      </p>
+      <div class="hero-cta">
+        <a href="#" class="btn-hero-primary">Try it free →</a>
+        <a href="#how-it-works" class="btn-hero-ghost">See how it works</a>
+      </div>
+      <div class="hero-trust">
+        <span class="hero-trust-item">Browser-only, no login</span>
+        <span class="hero-trust-item">Free &amp; open source</span>
+        <span class="hero-trust-item">No data leaves your device</span>
+      </div>
     </div>
-    <div class="hero-trust">
-      <span class="hero-trust-item">Browser-only, no login</span>
-      <span class="hero-trust-item">Free &amp; open source</span>
-      <span class="hero-trust-item">No data leaves your device</span>
+
+    <!-- RIGHT: CSS UI mockup — swap for a real screenshot when ready -->
+    <div class="hero-mockup" aria-hidden="true">
+      <div class="mockup-chrome">
+        <div class="chrome-dots">
+          <span class="chrome-dot" style="background:#ff5f57"></span>
+          <span class="chrome-dot" style="background:#febc2e"></span>
+          <span class="chrome-dot" style="background:#28c840"></span>
+        </div>
+        <span class="chrome-title">YOURTOOL · Estimate v2.0</span>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-metrics">
+          <div class="mockup-metric">
+            <div class="mockup-metric-val">$142k</div>
+            <div class="mockup-metric-label">Total cost</div>
+          </div>
+          <div class="mockup-metric">
+            <div class="mockup-metric-val">18 wks</div>
+            <div class="mockup-metric-label">Timeline</div>
+          </div>
+          <div class="mockup-metric hi">
+            <div class="mockup-metric-val">94%</div>
+            <div class="mockup-metric-label">Confidence</div>
+          </div>
+        </div>
+        <div class="mockup-chart">
+          <div class="chart-row">
+            <span class="chart-label">Frontend</span>
+            <div class="chart-track"><div class="chart-bar" style="width:65%"></div></div>
+            <span class="chart-val">6 wks</span>
+          </div>
+          <div class="chart-row">
+            <span class="chart-label">Backend</span>
+            <div class="chart-track"><div class="chart-bar" style="width:82%"></div></div>
+            <span class="chart-val">8 wks</span>
+          </div>
+          <div class="chart-row">
+            <span class="chart-label">DevOps</span>
+            <div class="chart-track"><div class="chart-bar" style="width:30%"></div></div>
+            <span class="chart-val">3 wks</span>
+          </div>
+          <div class="chart-row">
+            <span class="chart-label">QA</span>
+            <div class="chart-track"><div class="chart-bar" style="width:22%"></div></div>
+            <span class="chart-val">2 wks</span>
+          </div>
+        </div>
+        <div class="mockup-footer">Browser-only · No data uploaded · MIT License</div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -697,6 +830,7 @@ footer{background:#070e1a;padding:56px 0 36px}
 </section>
 
 <!-- SPLIT — text left, image right -->
+<!-- REPLACE: section-label, section-heading, section-sub, split-list items, image src + alt -->
 <section class="reveal">
   <div class="wrap">
     <div class="split">
@@ -710,12 +844,59 @@ footer{background:#070e1a;padding:56px 0 36px}
           <li>What makes this different from the spreadsheet or the incumbent.</li>
         </ul>
       </div>
-      <img
-        class="split-img"
-        src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&auto=format&fit=crop"
-        alt="Data analytics dashboard showing charts and metrics"
-        loading="lazy"
-      >
+      <!-- REPLACE: swap svg below with your actual screenshot -->
+      <div class="split-img-wrap">
+        <svg viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Dashboard illustration">
+          <rect width="480" height="360" fill="#f8fafc"/>
+          <!-- window card -->
+          <rect x="24" y="24" width="432" height="312" rx="12" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+          <!-- chrome bar -->
+          <rect x="24" y="24" width="432" height="40" rx="12" fill="#f1f5f9"/>
+          <rect x="24" y="52" width="432" height="12" fill="#f1f5f9"/>
+          <circle cx="46" cy="44" r="6" fill="#ff5f57"/>
+          <circle cx="64" cy="44" r="6" fill="#febc2e"/>
+          <circle cx="82" cy="44" r="6" fill="#28c840"/>
+          <rect x="170" y="36" width="140" height="16" rx="4" fill="#e2e8f0"/>
+          <!-- metric cards -->
+          <rect x="40" y="80" width="118" height="68" rx="8" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+          <rect x="174" y="80" width="118" height="68" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+          <rect x="308" y="80" width="148" height="68" rx="8" fill="#1d4ed8"/>
+          <!-- metric values -->
+          <text x="99" y="110" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#1d4ed8" text-anchor="middle">$142k</text>
+          <text x="99" y="134" font-family="system-ui,sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle" letter-spacing="1.5">TOTAL COST</text>
+          <text x="233" y="110" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#0f172a" text-anchor="middle">18 wks</text>
+          <text x="233" y="134" font-family="system-ui,sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle" letter-spacing="1.5">TIMELINE</text>
+          <text x="382" y="110" font-family="Georgia,serif" font-size="22" font-weight="700" fill="white" text-anchor="middle">94%</text>
+          <text x="382" y="134" font-family="system-ui,sans-serif" font-size="9" fill="rgba(255,255,255,.6)" text-anchor="middle" letter-spacing="1.5">CONFIDENCE</text>
+          <!-- section label -->
+          <text x="40" y="176" font-family="system-ui,sans-serif" font-size="9" font-weight="700" fill="#94a3b8" letter-spacing="1.5">EFFORT BREAKDOWN</text>
+          <!-- horizontal bars -->
+          <rect x="40" y="190" width="400" height="6" rx="3" fill="#f1f5f9"/>
+          <rect x="40" y="190" width="260" height="6" rx="3" fill="#1d4ed8" opacity=".85"/>
+          <text x="40" y="188" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">Frontend</text>
+          <text x="446" y="198" font-family="system-ui,sans-serif" font-size="10" fill="#94a3b8" text-anchor="end">6 wks</text>
+
+          <rect x="40" y="218" width="400" height="6" rx="3" fill="#f1f5f9"/>
+          <rect x="40" y="218" width="328" height="6" rx="3" fill="#1d4ed8"/>
+          <text x="40" y="216" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">Backend</text>
+          <text x="446" y="226" font-family="system-ui,sans-serif" font-size="10" fill="#94a3b8" text-anchor="end">8 wks</text>
+
+          <rect x="40" y="246" width="400" height="6" rx="3" fill="#f1f5f9"/>
+          <rect x="40" y="246" width="120" height="6" rx="3" fill="#1d4ed8" opacity=".5"/>
+          <text x="40" y="244" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">DevOps</text>
+          <text x="446" y="254" font-family="system-ui,sans-serif" font-size="10" fill="#94a3b8" text-anchor="end">3 wks</text>
+
+          <rect x="40" y="274" width="400" height="6" rx="3" fill="#f1f5f9"/>
+          <rect x="40" y="274" width="80" height="6" rx="3" fill="#1d4ed8" opacity=".3"/>
+          <text x="40" y="272" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">QA</text>
+          <text x="446" y="282" font-family="system-ui,sans-serif" font-size="10" fill="#94a3b8" text-anchor="end">2 wks</text>
+          <!-- status bar -->
+          <rect x="24" y="312" width="432" height="24" rx="0" fill="#f8fafc"/>
+          <rect x="24" y="324" width="432" height="12" rx="12" fill="#f8fafc"/>
+          <circle cx="44" cy="324" r="4" fill="#28c840"/>
+          <text x="52" y="328" font-family="system-ui,sans-serif" font-size="9" fill="#94a3b8">Browser-only · No data uploaded</text>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
@@ -817,6 +998,7 @@ footer{background:#070e1a;padding:56px 0 36px}
 </section>
 
 <!-- SPLIT — image left, text right -->
+<!-- REPLACE: section-label, section-heading, section-sub, split-list items, image src + alt -->
 <section class="soft reveal">
   <div class="wrap">
     <div class="split reverse">
@@ -830,12 +1012,45 @@ footer{background:#070e1a;padding:56px 0 36px}
           <li>Fork it, embed it, or adapt it — MIT licensed.</li>
         </ul>
       </div>
-      <img
-        class="split-img"
-        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&auto=format&fit=crop"
-        alt="Team collaborating around a laptop in a modern office"
-        loading="lazy"
-      >
+      <!-- REPLACE: swap svg below with your actual screenshot -->
+      <div class="split-img-wrap">
+        <svg viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Workflow illustration">
+          <rect width="480" height="360" fill="#f8fafc"/>
+          <!-- connecting lines -->
+          <line x1="100" y1="180" x2="174" y2="180" stroke="#bfdbfe" stroke-width="2" stroke-dasharray="5 4"/>
+          <line x1="246" y1="180" x2="320" y2="180" stroke="#bfdbfe" stroke-width="2" stroke-dasharray="5 4"/>
+          <line x1="392" y1="180" x2="440" y2="180" stroke="#bfdbfe" stroke-width="2" stroke-dasharray="5 4"/>
+          <!-- arrowheads -->
+          <polyline points="170,174 178,180 170,186" stroke="#bfdbfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="316,174 324,180 316,186" stroke="#bfdbfe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- step 1 -->
+          <circle cx="64" cy="180" r="44" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+          <text x="64" y="172" font-family="system-ui,sans-serif" font-size="22" text-anchor="middle">📋</text>
+          <text x="64" y="194" font-family="Georgia,serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">01</text>
+          <text x="64" y="242" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle">Configure</text>
+          <!-- step 2 (accent) -->
+          <circle cx="210" cy="180" r="52" fill="#1d4ed8"/>
+          <circle cx="210" cy="180" r="52" fill="none" stroke="#93c5fd" stroke-width="1.5" opacity=".4"/>
+          <text x="210" y="172" font-family="system-ui,sans-serif" font-size="26" text-anchor="middle">⚡</text>
+          <text x="210" y="196" font-family="Georgia,serif" font-size="13" font-weight="700" fill="white" text-anchor="middle">02</text>
+          <text x="210" y="252" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle">Process</text>
+          <!-- step 3 -->
+          <circle cx="356" cy="180" r="44" fill="white" stroke="#e2e8f0" stroke-width="1.5"/>
+          <text x="356" y="172" font-family="system-ui,sans-serif" font-size="22" text-anchor="middle">📊</text>
+          <text x="356" y="194" font-family="Georgia,serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">03</text>
+          <text x="356" y="242" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle">Review</text>
+          <!-- bottom tag -->
+          <rect x="166" y="290" width="148" height="28" rx="14" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+          <text x="240" y="309" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#1d4ed8" text-anchor="middle">Browser-only · No install</text>
+          <!-- decorative dots -->
+          <circle cx="40" cy="40" r="4" fill="#e2e8f0"/>
+          <circle cx="56" cy="40" r="4" fill="#e2e8f0"/>
+          <circle cx="72" cy="40" r="4" fill="#e2e8f0"/>
+          <circle cx="440" cy="320" r="4" fill="#e2e8f0"/>
+          <circle cx="424" cy="320" r="4" fill="#e2e8f0"/>
+          <circle cx="408" cy="320" r="4" fill="#e2e8f0"/>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
@@ -948,6 +1163,16 @@ footer{background:#070e1a;padding:56px 0 36px}
     </div>
   </div>
 </section>
+
+<!-- PALETTE PICKER — floating accent switcher, remove before shipping -->
+<div class="palette-picker" id="palette-picker" title="Preview accent colors">
+  <span class="palette-label">Theme</span>
+  <button class="palette-dot active" data-accent="blue"    style="background:#1d4ed8" title="Blue"></button>
+  <button class="palette-dot"        data-accent="indigo"  style="background:#4f46e5" title="Indigo"></button>
+  <button class="palette-dot"        data-accent="emerald" style="background:#059669" title="Emerald"></button>
+  <button class="palette-dot"        data-accent="rose"    style="background:#e11d48" title="Rose"></button>
+  <button class="palette-dot"        data-accent="amber"   style="background:#d97706" title="Amber"></button>
+</div>
 
 <!-- FOOTER -->
 <!-- ─────────────────────────────────────────────────────────────────
@@ -1065,7 +1290,7 @@ footer{background:#070e1a;padding:56px 0 36px}
   sections.forEach(s=>io.observe(s));
 })();
 
-// Accent color switcher — ?accent=indigo|emerald|rose|amber in the URL
+// Accent switcher — URL param (?accent=emerald) + floating picker dots
 (function(){
   const PRESETS={
     blue:   ['#1d4ed8','#2563eb','#eff6ff','#bfdbfe','#93c5fd'],
@@ -1074,11 +1299,21 @@ footer{background:#070e1a;padding:56px 0 36px}
     rose:   ['#e11d48','#f43f5e','#fff1f2','#fecdd3','#fda4af'],
     amber:  ['#d97706','#f59e0b','#fffbeb','#fde68a','#fcd34d'],
   };
-  const key = new URLSearchParams(location.search).get('accent');
-  const preset = PRESETS[key];
-  if(!preset) return;
   const props=['--accent','--accent-light','--accent-pale','--accent-border','--accent-text'];
-  preset.forEach((v,i)=>document.documentElement.style.setProperty(props[i],v));
+  const dots = document.querySelectorAll('.palette-dot[data-accent]');
+
+  function apply(key){
+    const p=PRESETS[key]; if(!p) return;
+    p.forEach((v,i)=>document.documentElement.style.setProperty(props[i],v));
+    dots.forEach(d=>d.classList.toggle('active',d.dataset.accent===key));
+  }
+
+  // apply URL param on load
+  const urlKey = new URLSearchParams(location.search).get('accent');
+  apply(urlKey||'blue');
+
+  // picker clicks
+  dots.forEach(d=>d.addEventListener('click',()=>apply(d.dataset.accent)));
 })();
 </script>
 
